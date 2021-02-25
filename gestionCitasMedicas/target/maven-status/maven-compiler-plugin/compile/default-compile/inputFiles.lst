@@ -1,0 +1,17 @@
+C:\Users\ruixi\eclipse-workspace\gestionCitasMedicas\src\main\java\com\metaenlace\gestionCitasMedicas\repository\IMedicoRepository.java
+C:\Users\ruixi\eclipse-workspace\gestionCitasMedicas\src\main\java\com\metaenlace\gestionCitasMedicas\service\UsuarioService.java
+C:\Users\ruixi\eclipse-workspace\gestionCitasMedicas\src\main\java\com\metaenlace\gestionCitasMedicas\serviceImpl\UsuarioServiceImpl.java
+C:\Users\ruixi\eclipse-workspace\gestionCitasMedicas\src\main\java\com\metaenlace\gestionCitasMedicas\GestionCitasMedicasInitDB.java
+C:\Users\ruixi\eclipse-workspace\gestionCitasMedicas\src\main\java\com\metaenlace\gestionCitasMedicas\entity\Paciente.java
+C:\Users\ruixi\eclipse-workspace\gestionCitasMedicas\src\main\java\com\metaenlace\gestionCitasMedicas\repository\IUsuarioGenericRepository.java
+C:\Users\ruixi\eclipse-workspace\gestionCitasMedicas\src\main\java\com\metaenlace\gestionCitasMedicas\dto\UsuarioDTO.java
+C:\Users\ruixi\eclipse-workspace\gestionCitasMedicas\src\main\java\com\metaenlace\gestionCitasMedicas\entity\Usuario.java
+C:\Users\ruixi\eclipse-workspace\gestionCitasMedicas\src\main\java\com\metaenlace\gestionCitasMedicas\GestionCitasMedicasApplication.java
+C:\Users\ruixi\eclipse-workspace\gestionCitasMedicas\src\main\java\com\metaenlace\gestionCitasMedicas\repository\ICitaRepository.java
+C:\Users\ruixi\eclipse-workspace\gestionCitasMedicas\src\main\java\com\metaenlace\gestionCitasMedicas\controller\UsuarioController.java
+C:\Users\ruixi\eclipse-workspace\gestionCitasMedicas\src\main\java\com\metaenlace\gestionCitasMedicas\repository\IDiagnosticoRepository.java
+C:\Users\ruixi\eclipse-workspace\gestionCitasMedicas\src\main\java\com\metaenlace\gestionCitasMedicas\entity\Cita.java
+C:\Users\ruixi\eclipse-workspace\gestionCitasMedicas\src\main\java\com\metaenlace\gestionCitasMedicas\repository\IUsuarioRepository.java
+C:\Users\ruixi\eclipse-workspace\gestionCitasMedicas\src\main\java\com\metaenlace\gestionCitasMedicas\entity\Diagnostico.java
+C:\Users\ruixi\eclipse-workspace\gestionCitasMedicas\src\main\java\com\metaenlace\gestionCitasMedicas\entity\Medico.java
+C:\Users\ruixi\eclipse-workspace\gestionCitasMedicas\src\main\java\com\metaenlace\gestionCitasMedicas\repository\IPacienteRepository.java
