@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.metaenlace.gestionCitasMedicas.dto.MedicoDTO;
+import com.metaenlace.gestionCitasMedicas.dto.MedicoRegistroDTO;
 import com.metaenlace.gestionCitasMedicas.entity.Medico;
 import com.metaenlace.gestionCitasMedicas.service.IMedicoService;
 
@@ -52,9 +53,9 @@ public class MedicoController {
     @PostMapping("/medicos/add")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public MedicoDTO addMedico(@RequestBody MedicoDTO medDTO) {
+    public MedicoDTO addMedico(@RequestBody MedicoRegistroDTO medRegDTO) {
     	try {
-    		Medico med = convertToEntity(medDTO);
+    		Medico med = convertRegistroToEntity(medRegDTO);
     		Medico createMed = medicoService.save(med);
     		return convertToDTO(createMed);
     	} catch (DataAccessException e) {
@@ -91,6 +92,11 @@ public class MedicoController {
     
     private Medico convertToEntity(MedicoDTO medDTO) {
     	Medico med = modelMapper.map(medDTO, Medico.class);
+        return med;
+    }
+    
+    private Medico convertRegistroToEntity(MedicoRegistroDTO medRegDTO) {
+    	Medico med = modelMapper.map(medRegDTO, Medico.class);
         return med;
     }
 }
