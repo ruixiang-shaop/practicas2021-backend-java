@@ -30,14 +30,14 @@ public class PacienteController {
 	private IPacienteService pacienteService;
 	
     @Autowired
-    private ModelMapper modelMapper;
+    private static ModelMapper modelMapper = new ModelMapper();
 
     @GetMapping("/pacientes")
     @ResponseBody
     public List<PacienteDTO> getPacientes() {
         List<Paciente> pacientes = pacienteService.findAll();
         return pacientes.stream()
-          .map(this::convertToDTO)
+          .map(p -> PacienteController.convertToDTO(p))
           .collect(Collectors.toList());
     }
     
@@ -86,12 +86,12 @@ public class PacienteController {
 		}
     }
     
-    private PacienteDTO convertToDTO(Paciente pac) {
+    static PacienteDTO convertToDTO(Paciente pac) {
     	PacienteDTO postDto = modelMapper.map(pac, PacienteDTO.class);
         return postDto;
     }
     
-    private Paciente convertToEntity(PacienteDTO pacDTO) {
+	static Paciente convertToEntity(PacienteDTO pacDTO) {
     	Paciente pac = modelMapper.map(pacDTO, Paciente.class);
         return pac;
     }
