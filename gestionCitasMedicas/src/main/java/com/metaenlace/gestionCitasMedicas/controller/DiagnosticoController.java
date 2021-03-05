@@ -68,7 +68,8 @@ public class DiagnosticoController {
     public void updateDiagnostico(@RequestBody DiagnosticoDTO diagDTO) {
     	try {
 			Diagnostico diag = convertToEntity(diagDTO);
-			diagService.update(diag);
+			if (!diagService.update(diag))		
+	    		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     	} catch (DataAccessException e) {
     		throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}

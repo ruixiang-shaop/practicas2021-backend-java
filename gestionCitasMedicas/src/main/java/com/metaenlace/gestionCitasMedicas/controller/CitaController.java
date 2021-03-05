@@ -70,7 +70,8 @@ public class CitaController {
     public void updateCita(@RequestBody CitaDTO citaDTO) {
     	try {
 			Cita cita = convertToEntity(citaDTO);
-			citaService.update(cita);
+			if (!citaService.update(cita))
+	    		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     	} catch (DataAccessException e) {
     		throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}

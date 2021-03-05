@@ -11,5 +11,5 @@ public interface ICitaService {
 	public Optional<Cita> findById(Long id);
 	public Cita save(Cita cita);
 	public boolean delete(Long id);
-	public String update(Cita cita);
+	public boolean update(Cita cita);
 }

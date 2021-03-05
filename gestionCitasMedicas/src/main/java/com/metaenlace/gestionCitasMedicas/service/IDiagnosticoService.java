@@ -11,5 +11,5 @@ public interface IDiagnosticoService {
 	public Optional<Diagnostico> findById(Long id);
 	public Diagnostico save(Diagnostico diag);
 	public boolean delete(Long id);
-	public String update(Diagnostico diag);
+	public boolean update(Diagnostico diag);
 }

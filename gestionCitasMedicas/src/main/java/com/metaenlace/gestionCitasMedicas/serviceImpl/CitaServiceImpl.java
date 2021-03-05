@@ -45,18 +45,18 @@ public class CitaServiceImpl implements ICitaService{
 	}
 
 	@Override
-	public String update(Cita cita) {
-		if (citaRepository.findById(cita.getId()).isPresent()) {
-			Cita citaUpdated = new Cita();
-			citaUpdated.setId(cita.getId());
-			citaUpdated.setFechaHora(cita.getFechaHora());
-			citaUpdated.setMotivoCita(cita.getMotivoCita());
-			citaUpdated.setPaciente(cita.getPaciente());
-			citaUpdated.setMedico(cita.getMedico());
-			citaUpdated.setDiagnostico(cita.getDiagnostico());
+	public boolean update(Cita cita) {
+		Optional<Cita> optCita = citaRepository.findById(cita.getId());
+		if (optCita.isPresent()) {
+			Cita citaUpdated = optCita.get();
+			if (cita.getFechaHora() != null) citaUpdated.setFechaHora(cita.getFechaHora());
+			if (cita.getMotivoCita() != null) citaUpdated.setMotivoCita(cita.getMotivoCita());
+			if (cita.getPaciente() != null) citaUpdated.setPaciente(cita.getPaciente());
+			if (cita.getMedico() != null) citaUpdated.setMedico(cita.getMedico());
+			if (cita.getDiagnostico() != null) citaUpdated.setDiagnostico(cita.getDiagnostico());
 			citaRepository.save(citaUpdated);
-			return "Cita modificada";
+			return true;
 		}
-		return "Error al modificar la cita";
+		return false;
 	}
 }

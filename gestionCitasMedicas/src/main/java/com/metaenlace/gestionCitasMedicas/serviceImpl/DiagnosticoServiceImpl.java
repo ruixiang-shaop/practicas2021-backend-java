@@ -43,15 +43,15 @@ public class DiagnosticoServiceImpl implements IDiagnosticoService{
 	}
 
 	@Override
-	public String update(Diagnostico diag) {
-		if (diagRepository.findById(diag.getId()).isPresent()) {
-			Diagnostico diagUpdated = new Diagnostico();
-			diagUpdated.setId(diag.getId());
-			diagUpdated.setValoracionEspecialista(diag.getValoracionEspecialista());
-			diagUpdated.setEnfermedad(diag.getEnfermedad());
+	public boolean update(Diagnostico diag) {
+		Optional<Diagnostico> optDiag = diagRepository.findById(diag.getId());
+		if (optDiag.isPresent()) {
+			Diagnostico diagUpdated = optDiag.get();
+			if (diag.getValoracionEspecialista() != null) diagUpdated.setValoracionEspecialista(diag.getValoracionEspecialista());
+			if (diag.getEnfermedad() != null) diagUpdated.setEnfermedad(diag.getEnfermedad());
 			diagRepository.save(diagUpdated);
-			return "Diagnostico modificado";
+			return true;
 		}
-		return "Error al modificar el diagnostico";
+		return false;
 	}
 }

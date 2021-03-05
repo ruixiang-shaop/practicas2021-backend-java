@@ -41,20 +41,20 @@ public class MedicoServiceImpl implements IMedicoService{
 	}
 
 	@Override
-	public String update(Medico med) {
-		if (medicoRepository.findById(med.getId()).isPresent()) {
-			Medico medUpdated = new Medico();
-			medUpdated.setId(med.getId());
-			medUpdated.setUsuario(med.getUsuario());
-			medUpdated.setClave(med.getClave());
-			medUpdated.setNombre(med.getNombre());
-			medUpdated.setApellidos(med.getApellidos());
-			medUpdated.setNumColegiado(med.getNumColegiado());
-			medUpdated.setPacientes(med.getPacientes());
-			medUpdated.setCitas(med.getCitas());
+	public boolean update(Medico med) {
+		Optional<Medico> optMed = medicoRepository.findById(med.getId());
+		if (optMed.isPresent()) {
+			Medico medUpdated = optMed.get();
+			if (med.getUsuario() != null) medUpdated.setUsuario(med.getUsuario());
+			if (med.getClave() != null) medUpdated.setClave(med.getClave());
+			if (med.getNombre() != null) medUpdated.setNombre(med.getNombre());
+			if (med.getApellidos() != null) medUpdated.setApellidos(med.getApellidos());
+			if (med.getNumColegiado() != null) medUpdated.setNumColegiado(med.getNumColegiado());
+			if (med.getPacientes() != null) medUpdated.setPacientes(med.getPacientes());
+			if (med.getCitas() != null) medUpdated.setCitas(med.getCitas());
 			medicoRepository.save(medUpdated);
-			return "Medico modificado";
+			return true;
 		}
-		return "Error al modificar el médico";
+		return false;
 	}
 }

@@ -68,7 +68,8 @@ public class MedicoController {
     public void updateMedico(@RequestBody MedicoDTO medDTO) {
     	try {
 			Medico med = convertToEntity(medDTO);
-			medicoService.update(med);
+			if (!medicoService.update(med))
+	    		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     	} catch (DataAccessException e) {
     		throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}

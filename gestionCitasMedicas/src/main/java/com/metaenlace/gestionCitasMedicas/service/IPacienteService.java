@@ -11,5 +11,5 @@ public interface IPacienteService {
 	public Optional<Paciente> findById(Long id);
 	public Paciente save(Paciente paciente);
 	public boolean delete(Long id);
-	public String update(Paciente paciente);
+	public boolean update(Paciente paciente);
 }

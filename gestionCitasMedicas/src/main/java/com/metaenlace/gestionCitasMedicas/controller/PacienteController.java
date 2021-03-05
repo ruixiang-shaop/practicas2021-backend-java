@@ -69,7 +69,8 @@ public class PacienteController {
     public void updatePaciente(@RequestBody PacienteDTO pacDTO) {
     	try {
 			Paciente pac = convertToEntity(pacDTO);
-			pacienteService.update(pac);
+			if (!pacienteService.update(pac))
+	    		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     	} catch (DataAccessException e) {
     		throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}

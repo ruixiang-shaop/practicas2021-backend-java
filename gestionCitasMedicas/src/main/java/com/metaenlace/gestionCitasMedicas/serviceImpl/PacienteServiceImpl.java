@@ -41,23 +41,23 @@ public class PacienteServiceImpl implements IPacienteService{
 	}
 
 	@Override
-	public String update(Paciente pac) {
-		if (pacienteRepository.findById(pac.getId()).isPresent()) {
-			Paciente pacUpdated = new Paciente();
-			pacUpdated.setId(pac.getId());
-			pacUpdated.setUsuario(pac.getUsuario());
-			pacUpdated.setClave(pac.getClave());
-			pacUpdated.setNombre(pac.getNombre());
-			pacUpdated.setApellidos(pac.getApellidos());
-			pacUpdated.setNss(pac.getNss());
-			pacUpdated.setNumTarjeta(pac.getNumTarjeta());
-			pacUpdated.setTelefono(pac.getTelefono());
-			pacUpdated.setDireccion(pac.getDireccion());
-			pacUpdated.setMedicos(pac.getMedicos());
-			pacUpdated.setCitas(pac.getCitas());
+	public boolean update(Paciente pac) {
+		Optional<Paciente> optPac = pacienteRepository.findById(pac.getId());
+		if (optPac.isPresent()) {
+			Paciente pacUpdated = optPac.get();
+			if (pac.getUsuario() != null) pacUpdated.setUsuario(pac.getUsuario());
+			if (pac.getClave() != null) pacUpdated.setClave(pac.getClave());
+			if (pac.getNombre() != null) pacUpdated.setNombre(pac.getNombre());
+			if (pac.getApellidos() != null) pacUpdated.setApellidos(pac.getApellidos());
+			if (pac.getNss() != null) pacUpdated.setNss(pac.getNss());
+			if (pac.getNumTarjeta() != null) pacUpdated.setNumTarjeta(pac.getNumTarjeta());
+			if (pac.getTelefono() != null) pacUpdated.setTelefono(pac.getTelefono());
+			if (pac.getDireccion() != null) pacUpdated.setDireccion(pac.getDireccion());
+			if (pac.getMedicos() != null) pacUpdated.setMedicos(pac.getMedicos());
+			if (pac.getCitas() != null) pacUpdated.setCitas(pac.getCitas());
 			pacienteRepository.save(pacUpdated);
-			return "Paciente modificado";
+			return true;
 		}
-		return "Error al modificar el paciente";
+		return false;
 	}
 }

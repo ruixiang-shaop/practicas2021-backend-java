@@ -15,8 +15,6 @@ public class MedicoDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Long id;
-	private String usuario;
-	private String clave;
 	private String nombre;
 	private String apellidos;
 	private String numColegiado;
@@ -33,22 +31,6 @@ public class MedicoDTO implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
-
-	public String getClave() {
-		return clave;
-	}
-
-	public void setClave(String clave) {
-		this.clave = clave;
 	}
 
 	public String getNombre() {
