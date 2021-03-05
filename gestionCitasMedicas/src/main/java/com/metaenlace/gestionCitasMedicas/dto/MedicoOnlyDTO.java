@@ -1,14 +1,8 @@
 package com.metaenlace.gestionCitasMedicas.dto;
 
 import java.io.Serializable;
-import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators.PropertyGenerator;
-
-
-@JsonIdentityInfo(generator = PropertyGenerator.class, property = "id", scope = MedicoDTO.class)
-public class MedicoDTO implements Serializable {
+public class MedicoOnlyDTO implements Serializable {
 	
 	/**
 	 * 
@@ -18,10 +12,8 @@ public class MedicoDTO implements Serializable {
 	private String nombre;
 	private String apellidos;
 	private String numColegiado;
-	private Set<PacienteDTO> pacientes;
-	private Set<CitaDTO> citas;
 	
-	public MedicoDTO() {
+	public MedicoOnlyDTO() {
 		super();
 	}
 
@@ -56,21 +48,4 @@ public class MedicoDTO implements Serializable {
 	public void setNumColegiado(String numColegiado) {
 		this.numColegiado = numColegiado;
 	}
-
-	public Set<PacienteDTO> getPacientes() {
-		return pacientes;
-	}
-
-	public void setPacientes(Set<PacienteDTO> pacientes) {
-		this.pacientes = pacientes;
-	}
-
-	public Set<CitaDTO> getCitas() {
-		return citas;
-	}
-
-	public void setCitas(Set<CitaDTO> citas) {
-		this.citas = citas;
-	}
-
 }

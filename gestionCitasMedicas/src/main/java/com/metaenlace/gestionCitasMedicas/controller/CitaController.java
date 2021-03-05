@@ -1,7 +1,5 @@
 package com.metaenlace.gestionCitasMedicas.controller;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -90,13 +88,11 @@ public class CitaController {
     
     private CitaDTO convertToDTO(Cita cita) {
     	CitaDTO postDto = modelMapper.map(cita, CitaDTO.class);
-    	postDto.setFechaHora(LocalDateTime.ofInstant(cita.getFechaHora().toInstant(), ZoneId.systemDefault()));
         return postDto;
     }
     
     private Cita convertToEntity(CitaDTO citaDTO) {
     	Cita cita = modelMapper.map(citaDTO, Cita.class);
-    	cita.setFechaHora(java.sql.Timestamp.valueOf(citaDTO.getFechaHora()));
         return cita;
     }
 }

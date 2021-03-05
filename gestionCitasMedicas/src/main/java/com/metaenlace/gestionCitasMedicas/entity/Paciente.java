@@ -28,10 +28,10 @@ public class Paciente extends Usuario {
     @Column(name = "direccion", nullable = false)
 	private String direccion;
     
-    @ManyToMany(mappedBy = "pacientes", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "pacientes", fetch = FetchType.LAZY)
 	private Set<Medico> medicos = new HashSet<Medico>();
     
-    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Cita> citas = new HashSet<Cita>();
 	
 			

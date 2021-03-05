@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.metaenlace.gestionCitasMedicas.dto.LoginDTO;
-import com.metaenlace.gestionCitasMedicas.dto.MedicoDTO;
-import com.metaenlace.gestionCitasMedicas.dto.PacienteDTO;
+import com.metaenlace.gestionCitasMedicas.dto.medico.MedicoDTO;
+import com.metaenlace.gestionCitasMedicas.dto.paciente.PacienteDTO;
 import com.metaenlace.gestionCitasMedicas.entity.Medico;
 import com.metaenlace.gestionCitasMedicas.entity.Paciente;
 import com.metaenlace.gestionCitasMedicas.entity.Usuario;

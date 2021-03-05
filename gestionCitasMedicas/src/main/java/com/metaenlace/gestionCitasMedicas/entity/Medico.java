@@ -26,10 +26,10 @@ public class Medico extends Usuario {
     		inverseJoinColumns = @JoinColumn(name = "fk_paciente", nullable = false)
     )
     
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
 	private Set<Paciente> pacientes = new HashSet<Paciente>();
     
-    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Cita> citas = new HashSet<Cita>();
 
         

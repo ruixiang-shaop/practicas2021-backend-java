@@ -1,12 +1,10 @@
-package com.metaenlace.gestionCitasMedicas.dto;
+package com.metaenlace.gestionCitasMedicas.dto.paciente;
 
 import java.io.Serializable;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators.PropertyGenerator;
+import com.metaenlace.gestionCitasMedicas.dto.MedicoOnlyDTO;
 
-@JsonIdentityInfo(generator = PropertyGenerator.class, property = "id", scope = PacienteDTO.class)
 public class PacienteDTO implements Serializable{
 
 	/**
@@ -20,7 +18,7 @@ public class PacienteDTO implements Serializable{
 	private String numTarjeta;
 	private String telefono;
 	private String direccion;
-	private Set<MedicoDTO> medicos;
+	private Set<MedicoOnlyDTO> medicos;
 	private Set<CitaDTO> citas;
 		
 	public PacienteDTO() {
@@ -83,11 +81,11 @@ public class PacienteDTO implements Serializable{
 		this.direccion = direccion;
 	}
 
-	public Set<MedicoDTO> getMedicos() {
+	public Set<MedicoOnlyDTO> getMedicos() {
 		return medicos;
 	}
 
-	public void setMedicos(Set<MedicoDTO> medicos) {
+	public void setMedicos(Set<MedicoOnlyDTO> medicos) {
 		this.medicos = medicos;
 	}
 
