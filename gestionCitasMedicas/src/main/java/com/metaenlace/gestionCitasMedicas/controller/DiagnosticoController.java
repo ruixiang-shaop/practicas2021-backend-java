@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -22,22 +21,20 @@ import org.springframework.web.server.ResponseStatusException;
 import com.metaenlace.gestionCitasMedicas.dto.DiagnosticoDTO;
 import com.metaenlace.gestionCitasMedicas.entity.Diagnostico;
 import com.metaenlace.gestionCitasMedicas.service.IDiagnosticoService;
+import com.metaenlace.gestionCitasMedicas.utils.DtoMapper;
 
 
 @RestController
 public class DiagnosticoController {
 	@Autowired
 	private IDiagnosticoService diagService;
-	
-    @Autowired
-    private ModelMapper modelMapper;
 
     @GetMapping("/diagnosticos")
     @ResponseBody
     public List<DiagnosticoDTO> getDiagnosticos() {
         List<Diagnostico> diagnosticos = diagService.findAll();
         return diagnosticos.stream()
-          .map(this::convertToDTO)
+          .map(d -> DtoMapper.diagnosticoToDto(d))
           .collect(Collectors.toList());
     }
     
@@ -47,7 +44,7 @@ public class DiagnosticoController {
         Optional<Diagnostico> diag = diagService.findById(id);
         if (diag.isEmpty())
         	throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        return convertToDTO(diag.get());
+        return DtoMapper.diagnosticoToDto(diag.get());
     }
     
     @PostMapping("/diagnosticos/add")
@@ -55,9 +52,9 @@ public class DiagnosticoController {
     @ResponseBody
     public DiagnosticoDTO addDiagnostico(@RequestBody DiagnosticoDTO diagDTO) {
     	try {
-    		Diagnostico diag = convertToEntity(diagDTO);
+    		Diagnostico diag = DtoMapper.dtoToDiagnostico(diagDTO);
     		Diagnostico createDiag = diagService.save(diag);
-    		return convertToDTO(createDiag);
+    		return DtoMapper.diagnosticoToDto(createDiag);
     	} catch (DataAccessException e) {
     		throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}
@@ -67,7 +64,7 @@ public class DiagnosticoController {
     @ResponseStatus(HttpStatus.OK)
     public void updateDiagnostico(@RequestBody DiagnosticoDTO diagDTO) {
     	try {
-			Diagnostico diag = convertToEntity(diagDTO);
+			Diagnostico diag = DtoMapper.dtoToDiagnostico(diagDTO);
 			if (!diagService.update(diag))		
 	    		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     	} catch (DataAccessException e) {
@@ -86,13 +83,5 @@ public class DiagnosticoController {
 		}
     }
     
-    private DiagnosticoDTO convertToDTO(Diagnostico diag) {
-    	DiagnosticoDTO postDto = modelMapper.map(diag, DiagnosticoDTO.class);
-        return postDto;
-    }
-    
-    private Diagnostico convertToEntity(DiagnosticoDTO diagDTO) {
-    	Diagnostico diag = modelMapper.map(diagDTO, Diagnostico.class);
-        return diag;
-    }
+
 }

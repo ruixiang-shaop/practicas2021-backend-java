@@ -17,6 +17,7 @@ import com.metaenlace.gestionCitasMedicas.entity.Medico;
 import com.metaenlace.gestionCitasMedicas.entity.Paciente;
 import com.metaenlace.gestionCitasMedicas.entity.Usuario;
 import com.metaenlace.gestionCitasMedicas.service.IUsuarioService;
+import com.metaenlace.gestionCitasMedicas.utils.DtoMapper;
 
 
 @RestController
@@ -43,10 +44,10 @@ public class UsuarioController {
     		if (!usr.getClave().equals(login.getClave()))
 				return new ResponseEntity<String>("La combinación de usuario y contraseña es incorrecta", HttpStatus.UNAUTHORIZED);
 			if (usr instanceof Medico) {
-				MedicoDTO mdto = MedicoController.convertToDTO((Medico) usr);
+				MedicoDTO mdto = DtoMapper.medicoToDto((Medico) usr);
 				return new ResponseEntity<MedicoDTO>(mdto, HttpStatus.OK);
     		} else {
-				PacienteDTO pdto = PacienteController.convertToDTO((Paciente) usr);
+				PacienteDTO pdto = DtoMapper.pacienteToDto((Paciente) usr);
 				return new ResponseEntity<PacienteDTO>(pdto, HttpStatus.OK);
     		}
     	}

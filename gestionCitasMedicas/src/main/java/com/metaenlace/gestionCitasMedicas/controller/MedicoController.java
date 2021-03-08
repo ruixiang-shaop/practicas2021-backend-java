@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -23,21 +22,19 @@ import com.metaenlace.gestionCitasMedicas.dto.medico.MedicoDTO;
 import com.metaenlace.gestionCitasMedicas.dto.MedicoRegistroDTO;
 import com.metaenlace.gestionCitasMedicas.entity.Medico;
 import com.metaenlace.gestionCitasMedicas.service.IMedicoService;
+import com.metaenlace.gestionCitasMedicas.utils.DtoMapper;
 
 @RestController
 public class MedicoController {
 	@Autowired
 	private IMedicoService medicoService;
-	
-    @Autowired
-    private static ModelMapper modelMapper = new ModelMapper();
 
     @GetMapping("/medicos")
     @ResponseBody
     public List<MedicoDTO> getMedicos() {
         List<Medico> medicos = medicoService.findAll();
         return medicos.stream()
-          .map(m -> MedicoController.convertToDTO(m))
+          .map(m -> DtoMapper.medicoToDto(m))
           .collect(Collectors.toList());
     }
     
@@ -47,7 +44,7 @@ public class MedicoController {
         Optional<Medico> med = medicoService.findById(id);
         if (med.isEmpty())
         	throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        return convertToDTO(med.get());
+        return DtoMapper.medicoToDto(med.get());
     }
     
     @PostMapping("/medicos/add")
@@ -55,9 +52,9 @@ public class MedicoController {
     @ResponseBody
     public MedicoDTO addMedico(@RequestBody MedicoRegistroDTO medRegDTO) {
     	try {
-    		Medico med = convertRegistroToEntity(medRegDTO);
+    		Medico med = DtoMapper.medRegDtoToMedico(medRegDTO);
     		Medico createMed = medicoService.save(med);
-    		return convertToDTO(createMed);
+    		return DtoMapper.medicoToDto(createMed);
     	} catch (DataAccessException e) {
     		throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}
@@ -67,7 +64,7 @@ public class MedicoController {
     @ResponseStatus(HttpStatus.OK)
     public void updateMedico(@RequestBody MedicoDTO medDTO) {
     	try {
-			Medico med = convertToEntity(medDTO);
+			Medico med = DtoMapper.dtoToMedico(medDTO);
 			if (!medicoService.update(med))
 	    		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     	} catch (DataAccessException e) {
@@ -84,20 +81,5 @@ public class MedicoController {
     	} catch (DataAccessException e) {
     		throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}
-    }
-    
-    static MedicoDTO convertToDTO(Medico med) {
-    	MedicoDTO postDto = modelMapper.map(med, MedicoDTO.class);
-        return postDto;
-    }
-    
-    static Medico convertToEntity(MedicoDTO medDTO) {
-    	Medico med = modelMapper.map(medDTO, Medico.class);
-        return med;
-    }
-    
-    private Medico convertRegistroToEntity(MedicoRegistroDTO medRegDTO) {
-    	Medico med = modelMapper.map(medRegDTO, Medico.class);
-        return med;
     }
 }

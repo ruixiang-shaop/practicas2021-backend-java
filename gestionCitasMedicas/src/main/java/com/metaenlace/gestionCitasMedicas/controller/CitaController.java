@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -22,22 +21,20 @@ import org.springframework.web.server.ResponseStatusException;
 import com.metaenlace.gestionCitasMedicas.dto.CitaDTO;
 import com.metaenlace.gestionCitasMedicas.entity.Cita;
 import com.metaenlace.gestionCitasMedicas.service.ICitaService;
+import com.metaenlace.gestionCitasMedicas.utils.DtoMapper;
 
 
 @RestController
 public class CitaController {
 	@Autowired
 	private ICitaService citaService;
-	
-    @Autowired
-    private ModelMapper modelMapper;
 
     @GetMapping("/citas")
     @ResponseBody
     public List<CitaDTO> getCitas() {
         List<Cita> citas = citaService.findAll();
         return citas.stream()
-          .map(this::convertToDTO)
+          .map(c -> DtoMapper.citaToDto(c))
           .collect(Collectors.toList());
     }
     
@@ -47,7 +44,7 @@ public class CitaController {
         Optional<Cita> cita = citaService.findById(id);
         if (cita.isEmpty())
         	throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        return convertToDTO(cita.get());
+        return DtoMapper.citaToDto(cita.get());
     }
     
     @PostMapping("/citas/add")
@@ -55,9 +52,9 @@ public class CitaController {
     @ResponseBody
     public CitaDTO addCita(@RequestBody CitaDTO citaDTO) {
     	try {
-    		Cita cita = convertToEntity(citaDTO);
+    		Cita cita = DtoMapper.dtoToCita(citaDTO);
     		Cita createCita = citaService.save(cita);
-    		return convertToDTO(createCita);
+    		return DtoMapper.citaToDto(createCita);
     	} catch (DataAccessException e) {
     		throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}
@@ -67,7 +64,7 @@ public class CitaController {
     @ResponseStatus(HttpStatus.OK)
     public void updateCita(@RequestBody CitaDTO citaDTO) {
     	try {
-			Cita cita = convertToEntity(citaDTO);
+			Cita cita = DtoMapper.dtoToCita(citaDTO);
 			if (!citaService.update(cita))
 	    		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     	} catch (DataAccessException e) {
@@ -84,15 +81,5 @@ public class CitaController {
     	} catch (DataAccessException e) {
     		throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}
-    }
-    
-    private CitaDTO convertToDTO(Cita cita) {
-    	CitaDTO postDto = modelMapper.map(cita, CitaDTO.class);
-        return postDto;
-    }
-    
-    private Cita convertToEntity(CitaDTO citaDTO) {
-    	Cita cita = modelMapper.map(citaDTO, Cita.class);
-        return cita;
     }
 }
