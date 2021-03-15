@@ -1,4 +1,4 @@
-package com.metaenlace.gestionCitasMedicas.dto;
+package com.metaenlace.gestionCitasMedicas.dto.register;
 
 import java.io.Serializable;
 

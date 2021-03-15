@@ -28,6 +28,7 @@ public class DiagnosticoServiceImpl implements IDiagnosticoService{
 
 	@Override
 	public Diagnostico save(Diagnostico diagnostico) {
+		diagnostico.getCita().setDiagnostico(diagnostico);
 		return diagRepository.save(diagnostico);
 	}
 
@@ -49,6 +50,7 @@ public class DiagnosticoServiceImpl implements IDiagnosticoService{
 			Diagnostico diagUpdated = optDiag.get();
 			if (diag.getValoracionEspecialista() != null) diagUpdated.setValoracionEspecialista(diag.getValoracionEspecialista());
 			if (diag.getEnfermedad() != null) diagUpdated.setEnfermedad(diag.getEnfermedad());
+			if (diag.getCita() != null) diagUpdated.setCita(diag.getCita());
 			diagRepository.save(diagUpdated);
 			return true;
 		}

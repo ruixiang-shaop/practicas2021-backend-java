@@ -2,11 +2,7 @@ package com.metaenlace.gestionCitasMedicas.dto;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators.PropertyGenerator;
 
-
-@JsonIdentityInfo(generator = PropertyGenerator.class, property = "usuario", scope = LoginDTO.class)
 public class LoginDTO implements Serializable {
 
 	/**

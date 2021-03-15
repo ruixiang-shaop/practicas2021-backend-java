@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.metaenlace.gestionCitasMedicas.dto.paciente.PacienteDTO;
-import com.metaenlace.gestionCitasMedicas.dto.PacienteRegistroDTO;
+import com.metaenlace.gestionCitasMedicas.dto.register.PacienteRegistroDTO;
 import com.metaenlace.gestionCitasMedicas.entity.Paciente;
 import com.metaenlace.gestionCitasMedicas.service.IPacienteService;
 import com.metaenlace.gestionCitasMedicas.utils.DtoMapper;

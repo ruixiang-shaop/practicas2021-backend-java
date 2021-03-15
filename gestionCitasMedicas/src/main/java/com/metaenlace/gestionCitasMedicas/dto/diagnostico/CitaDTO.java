@@ -1,9 +1,9 @@
-package com.metaenlace.gestionCitasMedicas.dto.medico;
+package com.metaenlace.gestionCitasMedicas.dto.diagnostico;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import com.metaenlace.gestionCitasMedicas.dto.DiagnosticoOnlyDTO;
+import com.metaenlace.gestionCitasMedicas.dto.MedicoOnlyDTO;
 import com.metaenlace.gestionCitasMedicas.dto.PacienteOnlyDTO;
 
 
@@ -17,7 +17,7 @@ public class CitaDTO implements Serializable {
 	private Date fechaHora;
 	private String motivoCita;
 	private PacienteOnlyDTO paciente;
-	private DiagnosticoOnlyDTO diagnostico;
+	private MedicoOnlyDTO medico;
 	
 	public CitaDTO() {
 		super();
@@ -55,12 +55,12 @@ public class CitaDTO implements Serializable {
 		this.paciente = paciente;
 	}
 
-	public DiagnosticoOnlyDTO getDiagnostico() {
-		return diagnostico;
+	public MedicoOnlyDTO getMedico() {
+		return medico;
 	}
 
-	public void setDiagnostico(DiagnosticoOnlyDTO diagnostico) {
-		this.diagnostico = diagnostico;
+	public void setMedico(MedicoOnlyDTO medico) {
+		this.medico = medico;
 	}
 		
 }

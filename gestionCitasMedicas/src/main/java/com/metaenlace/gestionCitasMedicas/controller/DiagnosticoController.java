@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.metaenlace.gestionCitasMedicas.dto.DiagnosticoDTO;
+import com.metaenlace.gestionCitasMedicas.dto.diagnostico.DiagnosticoDTO;
 import com.metaenlace.gestionCitasMedicas.entity.Diagnostico;
 import com.metaenlace.gestionCitasMedicas.service.IDiagnosticoService;
 import com.metaenlace.gestionCitasMedicas.utils.DtoMapper;
 
+//TODO crear dto para diagnostico para poder hacer un add y que se inserte automaticamente en la cita
+//TODO devolver el dto en un update de todos los controladores 
 
 @RestController
 public class DiagnosticoController {

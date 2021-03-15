@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -24,7 +25,8 @@ public class Diagnostico {
     @Column(name="enfermedad", nullable = false)
 	private String enfermedad;
 
-	@OneToOne(optional = false, mappedBy = "diagnostico")
+    @JoinColumn(name = "fk_cita", referencedColumnName = "id")
+	@OneToOne(optional = true)
 	private Cita cita;
 		
 	

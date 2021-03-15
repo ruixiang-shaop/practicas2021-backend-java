@@ -2,11 +2,7 @@ package com.metaenlace.gestionCitasMedicas.dto;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators.PropertyGenerator;
-
-@JsonIdentityInfo(generator = PropertyGenerator.class, property = "id", scope = DiagnosticoDTO.class)
-public class DiagnosticoDTO implements Serializable {
+public class DiagnosticoOnlyDTO implements Serializable {
 	
 	/**
 	 * 
@@ -16,7 +12,7 @@ public class DiagnosticoDTO implements Serializable {
 	private String valoracionEspecialista;
 	private String enfermedad;
 	
-	public DiagnosticoDTO() {
+	public DiagnosticoOnlyDTO() {
 		super();
 	}
 	

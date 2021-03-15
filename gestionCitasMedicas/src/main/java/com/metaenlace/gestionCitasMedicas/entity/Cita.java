@@ -40,8 +40,7 @@ public class Cita {
 	@ManyToOne(optional = false)
 	private Medico medico;
 
-    @JoinColumn(name = "fk_diagnostico", referencedColumnName = "id")
-	@OneToOne(optional = true, cascade = CascadeType.ALL)
+	@OneToOne(optional = true, cascade=CascadeType.ALL, mappedBy = "cita")
 	private Diagnostico diagnostico;
 	
 		

@@ -2,12 +2,12 @@ package com.metaenlace.gestionCitasMedicas.utils;
 
 import org.modelmapper.ModelMapper;
 
-import com.metaenlace.gestionCitasMedicas.dto.CitaDTO;
-import com.metaenlace.gestionCitasMedicas.dto.DiagnosticoDTO;
-import com.metaenlace.gestionCitasMedicas.dto.MedicoRegistroDTO;
-import com.metaenlace.gestionCitasMedicas.dto.PacienteRegistroDTO;
+import com.metaenlace.gestionCitasMedicas.dto.diagnostico.DiagnosticoDTO;
+import com.metaenlace.gestionCitasMedicas.dto.cita.CitaDTO;
 import com.metaenlace.gestionCitasMedicas.dto.medico.MedicoDTO;
 import com.metaenlace.gestionCitasMedicas.dto.paciente.PacienteDTO;
+import com.metaenlace.gestionCitasMedicas.dto.register.MedicoRegistroDTO;
+import com.metaenlace.gestionCitasMedicas.dto.register.PacienteRegistroDTO;
 import com.metaenlace.gestionCitasMedicas.entity.Cita;
 import com.metaenlace.gestionCitasMedicas.entity.Diagnostico;
 import com.metaenlace.gestionCitasMedicas.entity.Medico;
