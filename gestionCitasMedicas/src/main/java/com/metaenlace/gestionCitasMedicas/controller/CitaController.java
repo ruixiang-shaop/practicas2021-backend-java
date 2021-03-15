@@ -62,11 +62,13 @@ public class CitaController {
     
     @PutMapping("/citas/update")
     @ResponseStatus(HttpStatus.OK)
-    public void updateCita(@RequestBody CitaDTO citaDTO) {
+    public CitaDTO updateCita(@RequestBody CitaDTO citaDTO) {
     	try {
 			Cita cita = DtoMapper.dtoToCita(citaDTO);
-			if (!citaService.update(cita))
+			cita = citaService.update(cita);
+			if (cita == null)
 	    		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+			return DtoMapper.citaToDto(cita);
     	} catch (DataAccessException e) {
     		throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}

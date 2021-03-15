@@ -62,11 +62,13 @@ public class MedicoController {
     
     @PutMapping("/medicos/update")
     @ResponseStatus(HttpStatus.OK)
-    public void updateMedico(@RequestBody MedicoDTO medDTO) {
+    public MedicoDTO updateMedico(@RequestBody MedicoDTO medDTO) {
     	try {
 			Medico med = DtoMapper.dtoToMedico(medDTO);
-			if (!medicoService.update(med))
+			med = medicoService.update(med);
+			if (med == null)
 	    		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+			return DtoMapper.medicoToDto(med);
     	} catch (DataAccessException e) {
     		throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}

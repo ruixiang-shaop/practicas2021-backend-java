@@ -41,7 +41,7 @@ public class MedicoServiceImpl implements IMedicoService{
 	}
 
 	@Override
-	public boolean update(Medico med) {
+	public Medico update(Medico med) {
 		Optional<Medico> optMed = medicoRepository.findById(med.getId());
 		if (optMed.isPresent()) {
 			Medico medUpdated = optMed.get();
@@ -52,9 +52,8 @@ public class MedicoServiceImpl implements IMedicoService{
 			if (med.getNumColegiado() != null) medUpdated.setNumColegiado(med.getNumColegiado());
 			if (med.getPacientes() != null) medUpdated.setPacientes(med.getPacientes());
 			if (med.getCitas() != null) medUpdated.setCitas(med.getCitas());
-			medicoRepository.save(medUpdated);
-			return true;
+			return medicoRepository.save(medUpdated);
 		}
-		return false;
+		return null;
 	}
 }

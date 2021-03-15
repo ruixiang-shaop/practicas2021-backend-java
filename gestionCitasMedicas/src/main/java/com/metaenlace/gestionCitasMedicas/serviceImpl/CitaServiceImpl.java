@@ -45,7 +45,7 @@ public class CitaServiceImpl implements ICitaService{
 	}
 
 	@Override
-	public boolean update(Cita cita) {
+	public Cita update(Cita cita) {
 		Optional<Cita> optCita = citaRepository.findById(cita.getId());
 		if (optCita.isPresent()) {
 			Cita citaUpdated = optCita.get();
@@ -54,9 +54,8 @@ public class CitaServiceImpl implements ICitaService{
 			if (cita.getPaciente() != null) citaUpdated.setPaciente(cita.getPaciente());
 			if (cita.getMedico() != null) citaUpdated.setMedico(cita.getMedico());
 			if (cita.getDiagnostico() != null) citaUpdated.setDiagnostico(cita.getDiagnostico());
-			citaRepository.save(citaUpdated);
-			return true;
+			return citaRepository.save(citaUpdated);
 		}
-		return false;
+		return null;
 	}
 }

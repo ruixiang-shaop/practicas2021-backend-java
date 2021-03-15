@@ -23,7 +23,6 @@ import com.metaenlace.gestionCitasMedicas.entity.Diagnostico;
 import com.metaenlace.gestionCitasMedicas.service.IDiagnosticoService;
 import com.metaenlace.gestionCitasMedicas.utils.DtoMapper;
 
-//TODO crear dto para diagnostico para poder hacer un add y que se inserte automaticamente en la cita
 //TODO devolver el dto en un update de todos los controladores 
 
 @RestController
@@ -64,11 +63,13 @@ public class DiagnosticoController {
     
     @PutMapping("/diagnosticos/update")
     @ResponseStatus(HttpStatus.OK)
-    public void updateDiagnostico(@RequestBody DiagnosticoDTO diagDTO) {
+    public DiagnosticoDTO updateDiagnostico(@RequestBody DiagnosticoDTO diagDTO) {
     	try {
 			Diagnostico diag = DtoMapper.dtoToDiagnostico(diagDTO);
-			if (!diagService.update(diag))		
+			diag = diagService.update(diag);
+			if (diag == null)		
 	    		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+			return DtoMapper.diagnosticoToDto(diag);
     	} catch (DataAccessException e) {
     		throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}

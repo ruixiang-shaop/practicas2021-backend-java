@@ -41,7 +41,7 @@ public class PacienteServiceImpl implements IPacienteService{
 	}
 
 	@Override
-	public boolean update(Paciente pac) {
+	public Paciente update(Paciente pac) {
 		Optional<Paciente> optPac = pacienteRepository.findById(pac.getId());
 		if (optPac.isPresent()) {
 			Paciente pacUpdated = optPac.get();
@@ -55,9 +55,8 @@ public class PacienteServiceImpl implements IPacienteService{
 			if (pac.getDireccion() != null) pacUpdated.setDireccion(pac.getDireccion());
 			if (pac.getMedicos() != null) pacUpdated.setMedicos(pac.getMedicos());
 			if (pac.getCitas() != null) pacUpdated.setCitas(pac.getCitas());
-			pacienteRepository.save(pacUpdated);
-			return true;
+			return pacienteRepository.save(pacUpdated);
 		}
-		return false;
+		return null;
 	}
 }

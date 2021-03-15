@@ -11,5 +11,5 @@ public interface IMedicoService {
 	public Optional<Medico> findById(Long id);
 	public Medico save(Medico medico);
 	public boolean delete(Long id);
-	public boolean update(Medico medico);
+	public Medico update(Medico medico);
 }
