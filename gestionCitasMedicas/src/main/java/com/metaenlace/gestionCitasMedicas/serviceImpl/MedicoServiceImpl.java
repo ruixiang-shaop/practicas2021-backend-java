@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.metaenlace.gestionCitasMedicas.entity.Medico;
@@ -26,6 +28,18 @@ public class MedicoServiceImpl implements IMedicoService{
 		return medicoRepository.findById(id);
 	}
 
+	@Override
+	public Medico getRandom() {
+	    Long amount = medicoRepository.count();
+	    int idx = (int)(Math.random() * amount);
+	    Page<Medico> medPage = medicoRepository.findAll(PageRequest.of(idx, 1));
+	    Medico med = null;
+	    if (medPage.hasContent()) {
+	    	med = medPage.getContent().get(0);
+	    }
+	    return med;
+	}
+	
 	@Override
 	public Medico save(Medico medico) {
 		return medicoRepository.save(medico);

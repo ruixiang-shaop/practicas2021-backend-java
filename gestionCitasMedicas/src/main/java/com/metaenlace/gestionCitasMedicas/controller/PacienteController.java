@@ -20,7 +20,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.metaenlace.gestionCitasMedicas.dto.paciente.PacienteDTO;
 import com.metaenlace.gestionCitasMedicas.dto.register.PacienteRegistroDTO;
+import com.metaenlace.gestionCitasMedicas.entity.Medico;
 import com.metaenlace.gestionCitasMedicas.entity.Paciente;
+import com.metaenlace.gestionCitasMedicas.service.IMedicoService;
 import com.metaenlace.gestionCitasMedicas.service.IPacienteService;
 import com.metaenlace.gestionCitasMedicas.utils.DtoMapper;
 
@@ -28,6 +30,8 @@ import com.metaenlace.gestionCitasMedicas.utils.DtoMapper;
 public class PacienteController {
 	@Autowired
 	private IPacienteService pacienteService;
+	@Autowired
+	private IMedicoService medicoService;
 
     @GetMapping("/pacientes")
     @ResponseBody
@@ -54,6 +58,9 @@ public class PacienteController {
     public PacienteDTO addPaciente(@RequestBody PacienteRegistroDTO pacRegDTO) {
     	try {
     		Paciente pac = DtoMapper.pacRegDtoToPaciente(pacRegDTO);
+    		Medico med = medicoService.getRandom();
+    		pac.addMedico(med);
+    		med.addPaciente(pac);
     		Paciente createPac = pacienteService.save(pac);
     		return DtoMapper.pacienteToDto(createPac);
     	} catch (DataAccessException e) {

@@ -9,6 +9,7 @@ public interface IMedicoService {
 	
 	public List<Medico> findAll();
 	public Optional<Medico> findById(Long id);
+	public Medico getRandom();
 	public Medico save(Medico medico);
 	public boolean delete(Long id);
 	public Medico update(Medico medico);
